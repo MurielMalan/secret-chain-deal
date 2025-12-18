@@ -8,7 +8,7 @@ A decentralized encrypted multi-party negotiation platform built with FHEVM (Ful
 
 ## 🌐 Live Demo
 
-Try it now: **[https://secret-chain-deal.vercel.app/](https://secret-chain-deal.vercel.app/)**
+Try it now: **[https://secret-chain-deal.vercel.app/](https://secret-chain-deal-chi.vercel.app//)**
 
 ## ✨ Features
 
@@ -76,7 +76,7 @@ secret-chain-deal/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/VictorRaman77/secret-chain-deal.git
+   git clone https://github.com/MurielMalan/secret-chain-deal.git
    cd secret-chain-deal
    ```
 
@@ -246,7 +246,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 🆘 Support
 
-- **GitHub Issues**: [Report bugs or request features](https://github.com/VictorRaman77/secret-chain-deal/issues)
+- **GitHub Issues**: [Report bugs or request features](https://github.com/MurielMalan/secret-chain-deal/issues)
 - **FHEVM Documentation**: [docs.zama.ai](https://docs.zama.ai)
 - **Zama Discord**: [Join Community](https://discord.gg/zama)
 

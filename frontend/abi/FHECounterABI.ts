@@ -10,6 +10,44 @@ export const FHECounterABI = {
       "type": "error"
     },
     {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "euint32",
+          "name": "newCount",
+          "type": "bytes32"
+        }
+      ],
+      "name": "CountDecremented",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "euint32",
+          "name": "newCount",
+          "type": "bytes32"
+        }
+      ],
+      "name": "CountIncremented",
+      "type": "event"
+    },
+    {
       "inputs": [],
       "name": "confidentialProtocolId",
       "outputs": [

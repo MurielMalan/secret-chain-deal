@@ -35,68 +35,80 @@ export const HowItWorks = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="pb-20 px-4 sm:px-6">
-      <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+    <section className="relative py-14 sm:py-16 px-4 sm:px-6">
+      <div className="container mx-auto max-w-5xl relative z-10">
+        {/* Section Header */}
+        <div className="text-center mb-10 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-3 text-foreground">
             How It <span className="text-primary">Works</span>
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Secure, encrypted negotiations that prevent information leakage and ensure fairness
+          <p className="text-base text-muted-foreground max-w-xl mx-auto">
+            Secure, encrypted negotiations that ensure fairness for all parties
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {steps.map((step, index) => (
-            <div key={index} className="relative">
-              <Card
-                className={`p-5 sm:p-6 bg-gradient-card border-border transition-all duration-500 group cursor-pointer
-                  ${hoveredIndex === index ? "border-primary shadow-lg scale-[1.02]" : "hover:border-primary/50 hover:shadow-card"}
-                `}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                style={{ 
-                  animationDelay: `${index * 150}ms`,
-                  transform: hoveredIndex === index ? "translateY(-4px)" : "translateY(0)",
-                }}
-              >
-                <div className="flex flex-col items-center text-center space-y-3 sm:space-y-4">
-                  <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all duration-300
-                    ${hoveredIndex === index ? "bg-primary/30 scale-110" : "bg-muted group-hover:bg-primary/20"}
+        {/* Steps Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {steps.map((step, index) => {
+            const isHovered = hoveredIndex === index;
+            
+            return (
+              <div key={index} className="relative">
+                <Card
+                  className={`relative p-5 bg-card border transition-all duration-300 cursor-pointer
+                    ${isHovered 
+                      ? "border-primary/50 shadow-card -translate-y-1" 
+                      : "border-border/50 shadow-soft hover:border-primary/30"
+                    }
+                  `}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  {/* Step number */}
+                  <div className={`absolute top-3 right-3 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold transition-colors duration-300
+                    ${isHovered ? "bg-primary text-white" : "bg-muted text-muted-foreground"}
                   `}>
-                    <step.icon className={`w-7 h-7 sm:w-8 sm:h-8 transition-colors duration-300
-                      ${hoveredIndex === index ? "text-primary" : "text-primary/80"}
+                    {index + 1}
+                  </div>
+
+                  <div className="flex flex-col items-center text-center space-y-3">
+                    {/* Icon */}
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300
+                      ${isHovered ? "bg-primary/15 scale-105" : "bg-muted"}
+                    `}>
+                      <step.icon className={`w-6 h-6 transition-colors duration-300
+                        ${isHovered ? "text-primary" : "text-muted-foreground"}
+                      `} />
+                    </div>
+
+                    {/* Content */}
+                    <div className="space-y-1.5">
+                      <h3 className="text-base font-bold text-foreground">{step.title}</h3>
+                      <p className={`text-xs leading-relaxed transition-colors duration-300
+                        ${isHovered ? "text-foreground/80" : "text-muted-foreground"}
+                      `}>
+                        {isHovered ? step.detail : step.description}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+                
+                {/* Connector arrow */}
+                {index < steps.length - 1 && (
+                  <div className="hidden lg:flex absolute -right-2 top-1/2 -translate-y-1/2 z-10">
+                    <ArrowRight className={`w-4 h-4 transition-colors duration-300
+                      ${hoveredIndex === index || hoveredIndex === index + 1 
+                        ? "text-primary" 
+                        : "text-muted-foreground/30"
+                      }
                     `} />
                   </div>
-                  <div className="space-y-1.5 sm:space-y-2">
-                    <div className={`text-xs sm:text-sm font-semibold transition-colors duration-300
-                      ${hoveredIndex === index ? "text-primary" : "text-muted-foreground"}
-                    `}>
-                      Step {index + 1}
-                    </div>
-                    <h3 className="text-lg sm:text-xl font-bold">{step.title}</h3>
-                    <p className={`text-xs sm:text-sm transition-all duration-300
-                      ${hoveredIndex === index ? "text-foreground/80" : "text-muted-foreground"}
-                    `}>
-                      {hoveredIndex === index ? step.detail : step.description}
-                    </p>
-                  </div>
-                </div>
-              </Card>
-              
-              {/* Connector arrow between cards (hidden on mobile) */}
-              {index < steps.length - 1 && (
-                <div className="hidden lg:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10">
-                  <ArrowRight className={`w-5 h-5 transition-all duration-300
-                    ${hoveredIndex === index || hoveredIndex === index + 1 ? "text-primary scale-125" : "text-muted-foreground/30"}
-                  `} />
-                </div>
-              )}
-            </div>
-          ))}
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 };
-
